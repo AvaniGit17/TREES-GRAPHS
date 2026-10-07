@@ -1,0 +1,26 @@
+class Solution {
+public:
+     void  flatten(TreeNode* root) {
+        if (root == NULL)
+            return;
+
+        // Save the original right subtree
+        TreeNode* rightSubtree = root->right;
+
+        // Flatten the left subtree
+        flatten(root->left);
+
+        // Move left subtree to right
+        root->right = root->left;
+        root->left = NULL;
+
+        // Find the end of the flattened left subtree
+        TreeNode* curr = root;
+
+        while (curr->right != NULL){
+            curr = curr->right;
+
+        // Attach original right subtree to the root 
+        curr->right = rightSubtree;
+    }
+};
